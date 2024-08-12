@@ -1,0 +1,50 @@
+global:
+  host: ${dify_host_name}
+  port: ""
+  enableTLS: "false"
+  image:
+    tag: ${dify_version}
+  edition: "SELF_HOSTED"
+  storageType: "azure-blob"
+  extraEnvs: []
+  extraBackendEnvs:
+    - name: SECRET_KEY
+      value: "sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U"
+    - name: DB_USERNAME
+      value: "${postgre_user}"
+    - name: DB_PASSWORD
+      value: "${postgre_password}"
+    - name: DB_HOST
+      value: "${postgre_host}"
+    - name: DB_PORT
+      value: "5432"
+    - name: DB_DATABASE
+      value: "${postgre_db}"
+    - name: REDIS_HOST
+      value: "${redis_host}"
+    - name: REDIS_PORT
+      value: "${redis_port}"
+    - name: REDIS_PASSWORD
+      value: "${redis_password}"
+    - name: REDIS_DB
+      value: "1"
+    - name: CELERY_BROKER_URL
+      value: "redis://:${redis_password}@${redis_host}:${redis_port}/1"
+    - name: AZURE_BLOB_ACCOUNT_NAME
+      value: "${azure_blob_account_name}"
+    - name: AZURE_BLOB_ACCOUNT_KEY
+      value: "${azure_blob_account_key}"
+    - name: AZURE_BLOB_CONTAINER_NAME
+      value: "${azure_blob_container_name}"
+    - name: AZURE_BLOB_ACCOUNT_URL
+      value: "${azure_blob_account_url}"
+
+  # Provide extra labels for all deployments and related pods of this chart
+  labels: {}
+
+ingress:
+  enabled: "true"
+  #className: "webapprouting.kubernetes.azure.com"
+  annotations: 
+    kubernetes.io/ingress.class: azure/application-gateway
+  
