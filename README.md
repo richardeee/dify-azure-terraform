@@ -13,4 +13,4 @@ Back-end components:
 - Redis -> Azure Cache for Redis
 - Storage -> Azure Blob Storage
 
-Before you provision Dify, please check and set the variables in variables.tf file.
+Before you provision Dify, please add a terraform.tfvars file, you can refer to terraform.tfvars.example for the variables.
